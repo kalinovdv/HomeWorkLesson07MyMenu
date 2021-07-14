@@ -2,4 +2,5 @@
 <resources>
     <dimen name="buttonMainActivityWidth">0dp</dimen>
     <dimen name="textViewNotesFragmentTextSize">30sp</dimen>
+    <dimen name="textViewAddFragmentTextSize">30sp</dimen>
 </resources>
