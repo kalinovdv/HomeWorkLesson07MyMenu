@@ -3,8 +3,6 @@
     <string name="buttonMainActivityNotesText">Заметки</string>
     <string name="buttonMainActivityAddNoteText">Добавить</string>
     <string name="buttonMainActivitySettingsText">Настройки</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="textViewNotesFragmentText">Список заметок</string>
     <string name="textViewAddFragmentText">Добавить заметку</string>
     <string name="textViewSettingsFragmentText">Настройки</string>
