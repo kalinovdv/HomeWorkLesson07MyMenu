@@ -33,26 +33,23 @@ public class NotesFragment extends Fragment {
             Activity activity = requireActivity();
             PopupMenu popupMenu = new PopupMenu(activity, v);
             activity.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    int id = item.getItemId();
-                    switch (id) {
-                        case R.id.popupMenuAdd:
-                            Toast.makeText(getContext(), "Добавить заметку", Toast.LENGTH_SHORT).show();
-                            return true;
-                        case R.id.popupMenuEdit:
-                            Toast.makeText(getContext(), "Изменить заметку", Toast.LENGTH_SHORT).show();
-                            return true;
-                        case R.id.popupMenuDelete:
-                            Toast.makeText(getContext(), "Удалить заметку", Toast.LENGTH_SHORT).show();
-                            return true;
-                        case R.id.popupMenuUpdate:
-                            Toast.makeText(getContext(), "Обновить список", Toast.LENGTH_SHORT).show();
-                            return true;
-                    }
-                    return true;
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.popupMenuAdd:
+                        Toast.makeText(getContext(), "Добавить заметку", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.popupMenuEdit:
+                        Toast.makeText(getContext(), "Изменить заметку", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.popupMenuDelete:
+                        Toast.makeText(getContext(), "Удалить заметку", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.popupMenuUpdate:
+                        Toast.makeText(getContext(), "Обновить список", Toast.LENGTH_SHORT).show();
+                        return true;
                 }
+                return true;
             });
             popupMenu.show();
         });

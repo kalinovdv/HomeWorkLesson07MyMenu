@@ -14,4 +14,6 @@
     <string name="popupMenuEdit">Изменить</string>
     <string name="popupMenuDelete">Удалить</string>
     <string name="popupMenuUpdate">Обновить</string>
+    <string name="mainDrawerSettingsTitle">Настройки</string>
+    <string name="mainDrawerAboutTitle">О программе</string>
 </resources>

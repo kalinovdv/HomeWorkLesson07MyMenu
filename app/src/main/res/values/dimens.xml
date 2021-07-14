@@ -4,4 +4,6 @@
     <dimen name="textViewNotesFragmentTextSize">30sp</dimen>
     <dimen name="textViewAddFragmentTextSize">30sp</dimen>
     <dimen name="textViewSettingsFragmentTextSize">30sp</dimen>
+    <dimen name="navHeaderMainHeight">200dp</dimen>
+    <dimen name="navHeaderMainTextSize">42sp</dimen>
 </resources>
