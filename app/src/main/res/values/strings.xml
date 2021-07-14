@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyMenu</string>
+    <string name="app_name">Заметки</string>
     <string name="buttonMainActivityNotesText">Заметки</string>
     <string name="buttonMainActivityAddNoteText">Добавить</string>
     <string name="buttonMainActivitySettingsText">Настройки</string>
@@ -8,4 +8,7 @@
     <string name="textViewNotesFragmentText">Список заметок</string>
     <string name="textViewAddFragmentText">Добавить заметку</string>
     <string name="textViewSettingsFragmentText">Настройки</string>
+    <string name="mainMenuSearchTitle">Поиск</string>
+    <string name="mainMenuSettingsTitle">Настройки</string>
+    <string name="mainMenuAboutTitle">О программе</string>
 </resources>
