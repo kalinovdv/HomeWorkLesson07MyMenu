@@ -10,4 +10,8 @@
     <string name="mainMenuSettingsTitle">Настройки</string>
     <string name="mainMenuAboutTitle">О программе</string>
     <string name="notesFragmentMenuAddTitle">Добавить</string>
+    <string name="popupMenuAdd">Добавить</string>
+    <string name="popupMenuEdit">Изменить</string>
+    <string name="popupMenuDelete">Удалить</string>
+    <string name="popupMenuUpdate">Обновить</string>
 </resources>
