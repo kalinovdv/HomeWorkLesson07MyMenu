@@ -26,23 +26,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void initButtonSettings() {
         AppCompatButton button = findViewById(R.id.buttonMainActivitySettings);
-        button.setOnClickListener(v -> {
-            showFragment(new AddFragment());
-        });
+        button.setOnClickListener(v -> showFragment(new SettingsFragment()));
     }
 
     private void initButtonAdd() {
         AppCompatButton button = findViewById(R.id.buttonMainActivityAddNote);
-        button.setOnClickListener(v -> {
-            showFragment(new AddFragment());
-        });
+        button.setOnClickListener(v -> showFragment(new AddFragment()));
     }
 
     private void initButtonNotes() {
         AppCompatButton button = findViewById(R.id.buttonMainActivityNotes);
-        button.setOnClickListener(v -> {
-            showFragment(new NotesFragment());
-        });
+        button.setOnClickListener(v -> showFragment(new NotesFragment()));
     }
 
     private void showFragment(Fragment fragment) {
