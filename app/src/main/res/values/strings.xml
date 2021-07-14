@@ -9,4 +9,5 @@
     <string name="mainMenuSearchTitle">Поиск</string>
     <string name="mainMenuSettingsTitle">Настройки</string>
     <string name="mainMenuAboutTitle">О программе</string>
+    <string name="notesFragmentMenuAddTitle">Добавить</string>
 </resources>
