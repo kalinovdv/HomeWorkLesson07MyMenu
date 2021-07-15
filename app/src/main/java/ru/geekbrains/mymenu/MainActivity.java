@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawer(GravityCompat.START);
                         return true;
                     case R.id.mainDrawerAbout:
+                        showFragment(new AboutFragment());
                         drawer.closeDrawer(GravityCompat.START);
                         return true;
                 }
