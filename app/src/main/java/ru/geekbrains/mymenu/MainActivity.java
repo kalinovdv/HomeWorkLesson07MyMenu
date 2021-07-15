@@ -80,6 +80,18 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        MenuItem settings = menu.findItem(R.id.mainMenuSettings);
+        settings.setOnMenuItemClickListener(item -> {
+            showFragment(new SettingsFragment());
+            return true;
+        });
+
+        MenuItem about = menu.findItem(R.id.mainMenuAbout);
+        about.setOnMenuItemClickListener(item -> {
+            showFragment(new AboutFragment());
+            return true;
+        });
+
         return true;
     }
 
