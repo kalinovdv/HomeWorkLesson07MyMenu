@@ -18,4 +18,5 @@
     <string name="mainDrawerAboutTitle">О программе</string>
     <string name="navigationDrawerOpen">Открыть навигационное меню</string>
     <string name="navigationDrawerClose">Закрыть навигационное меню</string>
+    <string name="textViewAboutFragmentText">О программе</string>
 </resources>
