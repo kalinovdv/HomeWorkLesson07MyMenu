@@ -16,4 +16,6 @@
     <string name="popupMenuUpdate">Обновить</string>
     <string name="mainDrawerSettingsTitle">Настройки</string>
     <string name="mainDrawerAboutTitle">О программе</string>
+    <string name="navigationDrawerOpen">Открыть навигационное меню</string>
+    <string name="navigationDrawerClose">Закрыть навигационное меню</string>
 </resources>

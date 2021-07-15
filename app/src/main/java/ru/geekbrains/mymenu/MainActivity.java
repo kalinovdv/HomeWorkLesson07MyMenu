@@ -1,9 +1,13 @@
 package ru.geekbrains.mymenu;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,6 +16,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,10 +30,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        initToolbar();
+        Toolbar toolbar = initToolbar();
+        initDrawer(toolbar);
         initButtonNotes();
         initButtonAdd();
         initButtonSettings();
+    }
+
+    private void initDrawer(Toolbar toolbar) {
+        final DrawerLayout drawer = findViewById(R.id.drawerLayout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigationDrawerOpen, R.string.navigationDrawerClose);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.mainDrawerSettings:
+                        showFragment(new SettingsFragment());
+                        drawer.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.mainDrawerAbout:
+                        drawer.closeDrawer(GravityCompat.START);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -50,9 +82,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initToolbar() {
+    private Toolbar initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbarMainActivity);
         setSupportActionBar(toolbar);
+        return toolbar;
     }
 
     private void initButtonSettings() {
