@@ -24,6 +24,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Заголовок"
+                android:paddingLeft="@dimen/noteItemCardViewTitelPaddingLeft"
                 android:textSize="@dimen/noteItemCardViewTitelTextSize"/>
 
             <TextView
@@ -31,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Дата"
+                android:paddingRight="@dimen/noteItemCardViewDatePaddingRight"
                 android:layout_weight="1"
                 android:gravity="end|center"/>
         </LinearLayout>
@@ -39,6 +41,7 @@
             android:id="@+id/noteItemCardViewDiscription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/noteItemCardViewDiscriptionPaddingLeft"
             android:text="Описание"/>
 
     </LinearLayout>

@@ -11,4 +11,7 @@
     <dimen name="navHeaderMainTextSize2">16sp</dimen>
     <dimen name="noteItemTextViewTextSize">30sp</dimen>
     <dimen name="noteItemCardViewTitelTextSize">24sp</dimen>
+    <dimen name="noteItemCardViewTitelPaddingLeft">5dp</dimen>
+    <dimen name="noteItemCardViewDatePaddingRight">5dp</dimen>
+    <dimen name="noteItemCardViewDiscriptionPaddingLeft">5dp</dimen>
 </resources>
