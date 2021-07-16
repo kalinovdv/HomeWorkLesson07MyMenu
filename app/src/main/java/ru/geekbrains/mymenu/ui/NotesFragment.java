@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,14 +21,31 @@ import ru.geekbrains.mymenu.R;
 
 public class NotesFragment extends Fragment {
 
+    public static NotesFragment newInstance() {
+        return new NotesFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
-        setHasOptionsMenu(true);
-        initPopupMenu(view);
+        RecyclerView recyclerView = view.findViewById(R.id.fragmentNotesRecyclerView);
+        String[] data = getResources().getStringArray(R.array.titels);
+        initRecyclerView(recyclerView, data);
+        //setHasOptionsMenu(true);
+        //initPopupMenu(view);
         return view;
+    }
+
+    private void initRecyclerView(RecyclerView recyclerView, String[] data) {
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        NotesAdapter adapter = new NotesAdapter(data);
+        recyclerView.setAdapter(adapter);
     }
 
     private void initPopupMenu(View view) {

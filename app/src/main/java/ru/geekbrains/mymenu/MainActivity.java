@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         initButtonNotes();
         initButtonAdd();
         initButtonSettings();
+        showFragment(NotesFragment.newInstance());
     }
 
     private void initDrawer(Toolbar toolbar) {
