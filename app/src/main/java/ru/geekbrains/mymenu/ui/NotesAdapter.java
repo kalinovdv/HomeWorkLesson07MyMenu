@@ -14,6 +14,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     private String[] dataSource;
 
+    private OnNoteClickListener noteClickListener;
+
     public NotesAdapter(String[] dataSource) {
         this.dataSource = dataSource;
     }
@@ -41,10 +43,26 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textView = (TextView) itemView;
+            this.textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (noteClickListener != null) {
+                        noteClickListener.onNoteClick(view, getAdapterPosition());
+                    }
+                }
+            });
         }
 
         public TextView getTextView() {
             return this.textView;
         }
+    }
+
+    public void SetOnNoteClickListener(OnNoteClickListener noteClickListener) {
+        this.noteClickListener = noteClickListener;
+    }
+
+    public interface OnNoteClickListener {
+        void onNoteClick(View view, int position);
     }
 }

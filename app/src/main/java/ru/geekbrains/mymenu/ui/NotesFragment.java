@@ -33,8 +33,8 @@ public class NotesFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.fragmentNotesRecyclerView);
         String[] data = getResources().getStringArray(R.array.titels);
         initRecyclerView(recyclerView, data);
-        //setHasOptionsMenu(true);
-        //initPopupMenu(view);
+        setHasOptionsMenu(true);
+        initPopupMenu(view);
         return view;
     }
 
@@ -46,6 +46,13 @@ public class NotesFragment extends Fragment {
 
         NotesAdapter adapter = new NotesAdapter(data);
         recyclerView.setAdapter(adapter);
+
+        adapter.SetOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
+            @Override
+            public void onNoteClick(View view, int position) {
+                Toast.makeText(getContext(), String.format("%s - %d", ((TextView) view).getText(), position), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initPopupMenu(View view) {
