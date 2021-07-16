@@ -9,4 +9,5 @@
     <dimen name="textViewAboutFragmentTextSize">30sp</dimen>
     <dimen name="navHeaderMainPadding">16dp</dimen>
     <dimen name="navHeaderMainTextSize2">16sp</dimen>
+    <dimen name="noteItemTextViewTextSize">30sp</dimen>
 </resources>

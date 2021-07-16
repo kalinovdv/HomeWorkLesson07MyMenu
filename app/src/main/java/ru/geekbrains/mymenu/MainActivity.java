@@ -1,6 +1,5 @@
 package ru.geekbrains.mymenu;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -18,6 +17,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
+import ru.geekbrains.mymenu.ui.NotesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
