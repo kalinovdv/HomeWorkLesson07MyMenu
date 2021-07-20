@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ru.geekbrains.mymenu.AddFragment;
 import ru.geekbrains.mymenu.R;
 import ru.geekbrains.mymenu.data.NotesSource;
 import ru.geekbrains.mymenu.data.NotesSourceImpl;
@@ -102,7 +104,11 @@ public class NotesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.notesFragmentMenuAdd) {
-            Toast.makeText(getContext(), "Выбрано меню Добавить", Toast.LENGTH_SHORT).show();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, new AddFragment());
+            fragmentTransaction.commit();
+            //Toast.makeText(getContext(), "Выбрано меню Добавить", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
