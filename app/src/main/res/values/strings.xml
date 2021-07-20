@@ -20,4 +20,8 @@
     <string name="navigationDrawerClose">Закрыть навигационное меню</string>
     <string name="textViewAboutFragmentText">О программе</string>
     <string name="navHeaderMainText2">Иванов И.И.</string>
+    <string name="fragmentAddTitleEditTextHint">Название заметки</string>
+    <string name="fragmentAddTextEditTextHint">Описание заметки</string>
+    <string name="fragmentAddDateEditTextHint">Дата заметки</string>
+    <string name="fragmentAddButtonAddText">Добавить</string>
 </resources>

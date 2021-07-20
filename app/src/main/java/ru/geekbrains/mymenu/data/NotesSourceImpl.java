@@ -15,7 +15,7 @@ public class NotesSourceImpl implements NotesSource{
     private Resources resources;
 
     public NotesSourceImpl(Resources resources) {
-        this.dataSource = new ArrayList<>(5);
+        this.dataSource = new ArrayList<>(20);
         this.resources = resources;
     }
 
