@@ -1,9 +1,11 @@
 package ru.geekbrains.mymenu.ui;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ru.geekbrains.mymenu.R;
+import ru.geekbrains.mymenu.data.NotesSource;
+import ru.geekbrains.mymenu.data.NotesSourceImpl;
 
 public class NotesFragment extends Fragment {
 
@@ -31,14 +35,14 @@ public class NotesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.fragmentNotesRecyclerView);
-        String[] data = getResources().getStringArray(R.array.titels);
+        NotesSource data = new NotesSourceImpl(getResources()).init();
         initRecyclerView(recyclerView, data);
         setHasOptionsMenu(true);
         initPopupMenu(view);
         return view;
     }
 
-    private void initRecyclerView(RecyclerView recyclerView, String[] data) {
+    private void initRecyclerView(RecyclerView recyclerView, NotesSource data) {
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -46,6 +50,12 @@ public class NotesFragment extends Fragment {
 
         NotesAdapter adapter = new NotesAdapter(data);
         recyclerView.setAdapter(adapter);
+
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            itemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
+            recyclerView.addItemDecoration(itemDecoration);
+        }
 
         adapter.SetOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
             @Override

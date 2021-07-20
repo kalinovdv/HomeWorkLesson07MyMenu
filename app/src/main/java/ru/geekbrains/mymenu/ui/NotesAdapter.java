@@ -8,15 +8,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import ru.geekbrains.mymenu.NoteData;
 import ru.geekbrains.mymenu.R;
+import ru.geekbrains.mymenu.data.NotesSource;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
-    private String[] dataSource;
-
     private OnNoteClickListener noteClickListener;
+    private NotesSource dataSource;
 
-    public NotesAdapter(String[] dataSource) {
+    public NotesAdapter(NotesSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -29,21 +33,26 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull NotesAdapter.ViewHolder viewHolder, int position) {
-        viewHolder.getTextView().setText(dataSource[position]);
+        viewHolder.setData(dataSource.getNoteData(position));
     }
 
     @Override
     public int getItemCount() {
-        return dataSource.length;
+        return dataSource.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
+        private TextView title;
+        private TextView discription;
+        private TextView date;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.textView = (TextView) itemView;
-            this.textView.setOnClickListener(new View.OnClickListener() {
+            this.title = itemView.findViewById(R.id.noteItemCardViewTitel);
+            this.discription = itemView.findViewById(R.id.noteItemCardViewDiscription);
+            this.date = itemView.findViewById(R.id.noteItemCardViewDate);
+
+            this.title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (noteClickListener != null) {
@@ -53,8 +62,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             });
         }
 
-        public TextView getTextView() {
-            return this.textView;
+        public void setData(NoteData noteData) {
+            title.setText(noteData.getTitel());
+            discription.setText(noteData.getText());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm, dd-EEEE-yyyy");
+            String dateForm = simpleDateFormat.format(Calendar.getInstance().getTime());
+            date.setText(dateForm);
         }
     }
 
