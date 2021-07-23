@@ -5,4 +5,8 @@ import ru.geekbrains.mymenu.NoteData;
 public interface NotesSource {
     NoteData getNoteData(int position);
     int size();
+    void addNoteData(NoteData noteData);
+    void deleteNoteData(int position);
+    void updateNoteData(int position, NoteData noteData);
+    void clearNoteData();
 }
