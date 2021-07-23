@@ -1,8 +1,5 @@
 package ru.geekbrains.mymenu;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.Date;
 
 public class NoteData {

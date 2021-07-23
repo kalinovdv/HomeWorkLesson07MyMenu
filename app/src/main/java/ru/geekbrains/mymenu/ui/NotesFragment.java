@@ -136,10 +136,15 @@ public class NotesFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int position = adapter.getMenuPosition();
         switch (item.getItemId()) {
             case R.id.noteMenuUpdate:
+                data.updateNoteData(position, new NoteData("Заметка изменена " + (position + 1), data.getNoteData(position).getText(), data.getNoteData(position).getDate()));
+                adapter.notifyItemChanged(position);
                 return true;
             case R.id.noteMenuDelete:
+                data.deleteNoteData(position);
+                adapter.notifyItemRemoved(position);
                 return true;
         }
         return super.onContextItemSelected(item);
