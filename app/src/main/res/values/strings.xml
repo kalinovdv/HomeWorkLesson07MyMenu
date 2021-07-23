@@ -27,4 +27,6 @@
     <string name="notesFragmentMenuUpdateTitel">Изменить</string>
     <string name="notesFragmentMenuDeleteTitel">Удалить</string>
     <string name="notesFragmentMenuClearTitel">Очистить</string>
+    <string name="noteMenuUpdateTitel">Изменить</string>
+    <string name="noteMenuDeleteTitel">Удалить</string>
 </resources>
