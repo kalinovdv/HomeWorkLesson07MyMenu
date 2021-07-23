@@ -1,11 +1,13 @@
 package ru.geekbrains.mymenu.ui;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -19,9 +21,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     private OnNoteClickListener noteClickListener;
     private NotesSource dataSource;
+    private Fragment fragment;
 
-    public NotesAdapter(NotesSource dataSource) {
+    public NotesAdapter(NotesSource dataSource, Fragment fragment) {
         this.dataSource = dataSource;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -46,11 +50,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         private TextView discription;
         private TextView date;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             this.title = itemView.findViewById(R.id.noteItemCardViewTitel);
             this.discription = itemView.findViewById(R.id.noteItemCardViewDiscription);
             this.date = itemView.findViewById(R.id.noteItemCardViewDate);
+
+            registerContextMenu(itemView);
 
             this.title.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,6 +66,22 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
                     }
                 }
             });
+
+            this.title.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        itemView.showContextMenu(10, 10);
+                    }
+                    return true;
+                }
+            });
+        }
+
+        private void registerContextMenu(View itemView) {
+            if (fragment != null) {
+                fragment.registerForContextMenu(itemView);
+            }
         }
 
         public void setData(NoteData noteData) {
