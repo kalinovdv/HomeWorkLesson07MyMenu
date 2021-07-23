@@ -1,8 +1,11 @@
 package ru.geekbrains.mymenu;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class NoteData {
+public class NoteData implements Parcelable {
     private String titel;
     private String text;
     private Date date;
@@ -11,6 +14,12 @@ public class NoteData {
         this.titel = titel;
         this.text = text;
         this.date = date;
+    }
+
+    protected NoteData(Parcel in) {
+        titel = in.readString();
+        text = in.readString();
+        date = new Date(in.readLong());
     }
 
     public String getTitel() {
@@ -35,6 +44,30 @@ public class NoteData {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public static final Creator<NoteData> CREATOR = new Creator<NoteData>() {
+        @Override
+        public NoteData createFromParcel(Parcel in) {
+            return new NoteData(in);
+        }
+
+        @Override
+        public NoteData[] newArray(int size) {
+            return new NoteData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(titel);
+        dest.writeString(text);
+        dest.writeLong(date.getTime());
     }
 
 }

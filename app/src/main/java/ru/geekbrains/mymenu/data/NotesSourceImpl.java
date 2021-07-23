@@ -3,6 +3,7 @@ package ru.geekbrains.mymenu.data;
 import android.content.res.Resources;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class NotesSourceImpl implements NotesSource{
         String[] discription = resources.getStringArray(R.array.discription);
 
         for (int i = 0; i < discription.length; i++) {
-            dataSource.add(new NoteData(titels[i], discription[i], new Date()));
+            dataSource.add(new NoteData(titels[i], discription[i], Calendar.getInstance().getTime()));
         }
         return this;
     }
