@@ -29,4 +29,8 @@
     <string name="notesFragmentMenuClearTitel">Очистить</string>
     <string name="noteMenuUpdateTitel">Изменить</string>
     <string name="noteMenuDeleteTitel">Удалить</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="NoteFragmentInputTitleHint">Заголовок</string>
+    <string name="NoteFragmentInputTextHint">Описание</string>
 </resources>
