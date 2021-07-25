@@ -101,7 +101,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             title.setText(noteData.getTitel());
             discription.setText(noteData.getText());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm, dd-EEEE-yyyy");
-            String dateForm = simpleDateFormat.format(Calendar.getInstance().getTime());
+            String dateForm = simpleDateFormat.format(noteData.getDate());
             date.setText(dateForm);
         }
     }

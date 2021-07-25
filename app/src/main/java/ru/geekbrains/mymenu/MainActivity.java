@@ -18,15 +18,20 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import ru.geekbrains.mymenu.observe.Publisher;
 import ru.geekbrains.mymenu.ui.NotesFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Publisher publisher = new Publisher();
+    private Navigation navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        navigation = new Navigation(getSupportFragmentManager());
+        getNavigation().showFragment(NotesFragment.newInstance(), false);
         initView();
     }
 
@@ -36,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         initButtonNotes();
         initButtonAdd();
         initButtonSettings();
-        showFragment(NotesFragment.newInstance());
     }
 
     private void initDrawer(Toolbar toolbar) {
@@ -100,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbarMainActivity);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         return toolbar;
     }
 
@@ -123,5 +129,19 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public Navigation getNavigation() {
+        return navigation;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

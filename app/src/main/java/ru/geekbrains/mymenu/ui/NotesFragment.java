@@ -1,5 +1,6 @@
 package ru.geekbrains.mymenu.ui;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -22,10 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Date;
 
+import ru.geekbrains.mymenu.MainActivity;
+import ru.geekbrains.mymenu.Navigation;
 import ru.geekbrains.mymenu.NoteData;
 import ru.geekbrains.mymenu.R;
 import ru.geekbrains.mymenu.data.NotesSource;
 import ru.geekbrains.mymenu.data.NotesSourceImpl;
+import ru.geekbrains.mymenu.observe.Observer;
+import ru.geekbrains.mymenu.observe.Publisher;
 
 public class NotesFragment extends Fragment {
 
@@ -34,9 +39,18 @@ public class NotesFragment extends Fragment {
     private NotesSource data;
     private NotesAdapter adapter;
     private RecyclerView recyclerView;
+    private Navigation navigation;
+    private Publisher publisher;
+    private boolean moveToLastPosition;
 
     public static NotesFragment newInstance() {
         return new NotesFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        data = new NotesSourceImpl(getResources()).init();
     }
 
     @Override
@@ -45,11 +59,25 @@ public class NotesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
         //RecyclerView recyclerView = view.findViewById(R.id.fragmentNotesRecyclerView);
-        data = new NotesSourceImpl(getResources()).init();
         initView(view);
         setHasOptionsMenu(true);
         //initPopupMenu(view);
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        MainActivity activity =(MainActivity) context;
+        navigation = activity.getNavigation();
+        publisher = activity.getPublisher();
+    }
+
+    @Override
+    public void onDetach() {
+        navigation = null;
+        publisher = null;
+        super.onDetach();
     }
 
     private void initView(View view) {
@@ -77,6 +105,11 @@ public class NotesFragment extends Fragment {
         animator.setAddDuration(MY_DEFAULT_DURATION);
         animator.setRemoveDuration(MY_DEFAULT_DURATION);
         recyclerView.setItemAnimator(animator);
+
+        if (moveToLastPosition) {
+            recyclerView.smoothScrollToPosition(data.size() - 1);
+            moveToLastPosition = false;
+        }
 
         adapter.SetOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
             @Override
@@ -123,9 +156,15 @@ public class NotesFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notesFragmentMenuAdd:
-                data.addNoteData(new NoteData("Заметка " + (data.size() + 1), "Описание заметки " + (data.size() + 1), new Date()));
-                adapter.notifyItemInserted(data.size() - 1);
-                recyclerView.smoothScrollToPosition(data.size() - 1);
+                navigation.showFragment(NoteFragment.newInstance(), true);
+                publisher.subscribe(new Observer() {
+                    @Override
+                    public void updateNoteData(NoteData noteData) {
+                        data.addNoteData(noteData);
+                        adapter.notifyItemInserted(data.size() - 1);
+                        moveToLastPosition = true;
+                    }
+                });
                 return true;
             case R.id.notesFragmentMenuClear:
                 data.clearNoteData();
@@ -147,8 +186,14 @@ public class NotesFragment extends Fragment {
         int position = adapter.getMenuPosition();
         switch (item.getItemId()) {
             case R.id.noteMenuUpdate:
-                data.updateNoteData(position, new NoteData("Заметка изменена " + (position + 1), data.getNoteData(position).getText(), data.getNoteData(position).getDate()));
-                adapter.notifyItemChanged(position);
+                navigation.showFragment(NoteFragment.newInstance(data.getNoteData(position)), true);
+                publisher.subscribe(new Observer() {
+                    @Override
+                    public void updateNoteData(NoteData noteData) {
+                        data.updateNoteData(position, noteData);
+                        adapter.notifyItemChanged(position);
+                    }
+                });
                 return true;
             case R.id.noteMenuDelete:
                 data.deleteNoteData(position);

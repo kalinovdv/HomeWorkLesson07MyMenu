@@ -11,7 +11,7 @@ public class Navigation {
         this.fragmentManager = fragmentManager;
     }
 
-    public void addFragment(Fragment fragment, boolean useBackStack) {
+    public void showFragment(Fragment fragment, boolean useBackStack) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         if (useBackStack) {
