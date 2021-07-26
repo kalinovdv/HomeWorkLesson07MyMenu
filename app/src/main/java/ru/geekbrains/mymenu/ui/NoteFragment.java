@@ -33,8 +33,6 @@ public class NoteFragment extends Fragment {
     private TextInputEditText text;
     private DatePicker datePicker;
 
-    public NoteFragment() {}
-
     public static NoteFragment newInstance(NoteData noteData) {
         NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();

@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         Toolbar toolbar = initToolbar();
-        initDrawer(toolbar);
-        initButtonNotes();
-        initButtonAdd();
-        initButtonSettings();
+//        initDrawer(toolbar);
+//        initButtonNotes();
+//        initButtonAdd();
+//        initButtonSettings();
     }
 
     private void initDrawer(Toolbar toolbar) {
@@ -109,20 +109,20 @@ public class MainActivity extends AppCompatActivity {
         return toolbar;
     }
 
-    private void initButtonSettings() {
-        AppCompatButton button = findViewById(R.id.buttonMainActivitySettings);
-        button.setOnClickListener(v -> showFragment(new SettingsFragment()));
-    }
-
-    private void initButtonAdd() {
-        AppCompatButton button = findViewById(R.id.buttonMainActivityAddNote);
-        button.setOnClickListener(v -> showFragment(new AddFragment()));
-    }
-
-    private void initButtonNotes() {
-        AppCompatButton button = findViewById(R.id.buttonMainActivityNotes);
-        button.setOnClickListener(v -> showFragment(new NotesFragment()));
-    }
+//    private void initButtonSettings() {
+//        AppCompatButton button = findViewById(R.id.buttonMainActivitySettings);
+//        button.setOnClickListener(v -> showFragment(new SettingsFragment()));
+//    }
+//
+//    private void initButtonAdd() {
+//        AppCompatButton button = findViewById(R.id.buttonMainActivityAddNote);
+//        button.setOnClickListener(v -> showFragment(new AddFragment()));
+//    }
+//
+//    private void initButtonNotes() {
+//        AppCompatButton button = findViewById(R.id.buttonMainActivityNotes);
+//        button.setOnClickListener(v -> showFragment(new NotesFragment()));
+//    }
 
     private void showFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
