@@ -21,11 +21,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Date;
-
 import ru.geekbrains.mymenu.MainActivity;
 import ru.geekbrains.mymenu.Navigation;
-import ru.geekbrains.mymenu.NoteData;
+import ru.geekbrains.mymenu.data.NoteData;
 import ru.geekbrains.mymenu.R;
 import ru.geekbrains.mymenu.data.NotesSource;
 import ru.geekbrains.mymenu.data.NotesSourceImpl;

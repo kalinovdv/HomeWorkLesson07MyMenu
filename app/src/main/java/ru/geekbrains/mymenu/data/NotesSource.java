@@ -1,7 +1,5 @@
 package ru.geekbrains.mymenu.data;
 
-import ru.geekbrains.mymenu.NoteData;
-
 public interface NotesSource {
     NotesSource init(NotesSourceResponse notesSourceResponse);
     NoteData getNoteData(int position);

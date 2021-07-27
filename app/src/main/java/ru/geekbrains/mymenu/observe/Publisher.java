@@ -3,7 +3,7 @@ package ru.geekbrains.mymenu.observe;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.geekbrains.mymenu.NoteData;
+import ru.geekbrains.mymenu.data.NoteData;
 
 public class Publisher {
     private List<Observer> observers;

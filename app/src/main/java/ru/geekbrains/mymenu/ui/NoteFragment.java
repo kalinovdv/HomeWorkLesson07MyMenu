@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ru.geekbrains.mymenu.MainActivity;
-import ru.geekbrains.mymenu.NoteData;
+import ru.geekbrains.mymenu.data.NoteData;
 import ru.geekbrains.mymenu.R;
 import ru.geekbrains.mymenu.observe.Publisher;
 

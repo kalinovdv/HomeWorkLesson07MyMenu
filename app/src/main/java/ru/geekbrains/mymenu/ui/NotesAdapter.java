@@ -11,9 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-import ru.geekbrains.mymenu.NoteData;
+import ru.geekbrains.mymenu.data.NoteData;
 import ru.geekbrains.mymenu.R;
 import ru.geekbrains.mymenu.data.NotesSource;
 
