@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     private void showFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(R.id.fragment_container, fragment).addToBackStack(null);
         fragmentTransaction.commit();
     }
 
