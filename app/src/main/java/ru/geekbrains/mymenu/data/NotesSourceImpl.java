@@ -4,7 +4,6 @@ import android.content.res.Resources;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import ru.geekbrains.mymenu.NoteData;
@@ -20,12 +19,16 @@ public class NotesSourceImpl implements NotesSource{
         this.resources = resources;
     }
 
-    public NotesSourceImpl init() {
+    public NotesSource init(NotesSourceResponse notesSourceResponse) {
         String[] titels = resources.getStringArray(R.array.titels);
         String[] discription = resources.getStringArray(R.array.discription);
 
         for (int i = 0; i < discription.length; i++) {
             dataSource.add(new NoteData(titels[i], discription[i], Calendar.getInstance().getTime()));
+        }
+
+        if (notesSourceResponse != null) {
+            notesSourceResponse.initialized(this);
         }
         return this;
     }
