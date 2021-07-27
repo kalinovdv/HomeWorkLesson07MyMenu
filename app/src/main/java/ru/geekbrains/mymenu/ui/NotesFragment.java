@@ -26,7 +26,9 @@ import ru.geekbrains.mymenu.Navigation;
 import ru.geekbrains.mymenu.data.NoteData;
 import ru.geekbrains.mymenu.R;
 import ru.geekbrains.mymenu.data.NotesSource;
+import ru.geekbrains.mymenu.data.NotesSourceFirebaseImpl;
 import ru.geekbrains.mymenu.data.NotesSourceImpl;
+import ru.geekbrains.mymenu.data.NotesSourceResponse;
 import ru.geekbrains.mymenu.observe.Observer;
 import ru.geekbrains.mymenu.observe.Publisher;
 
@@ -39,17 +41,17 @@ public class NotesFragment extends Fragment {
     private RecyclerView recyclerView;
     private Navigation navigation;
     private Publisher publisher;
-    private boolean moveToLastPosition;
+    private boolean moveToFirstPosition;
 
     public static NotesFragment newInstance() {
         return new NotesFragment();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        data = new NotesSourceImpl(getResources()).init();
-    }
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        data = new NotesSourceImpl(getResources()).init();
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,13 @@ public class NotesFragment extends Fragment {
         initView(view);
         setHasOptionsMenu(true);
         //initPopupMenu(view);
+        data = new NotesSourceFirebaseImpl().init(new NotesSourceResponse() {
+            @Override
+            public void initialized(NotesSource notesSource) {
+                adapter.notifyDataSetChanged();
+            }
+        });
+        adapter.setDataSource(data);
         return view;
     }
 
@@ -104,9 +113,9 @@ public class NotesFragment extends Fragment {
         animator.setRemoveDuration(MY_DEFAULT_DURATION);
         recyclerView.setItemAnimator(animator);
 
-        if (moveToLastPosition) {
+        if (moveToFirstPosition) {
             recyclerView.smoothScrollToPosition(data.size() - 1);
-            moveToLastPosition = false;
+            moveToFirstPosition = false;
         }
 
         adapter.SetOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
@@ -160,7 +169,7 @@ public class NotesFragment extends Fragment {
                     public void updateNoteData(NoteData noteData) {
                         data.addNoteData(noteData);
                         adapter.notifyItemInserted(data.size() - 1);
-                        moveToLastPosition = true;
+                        moveToFirstPosition = true;
                     }
                 });
                 return true;
