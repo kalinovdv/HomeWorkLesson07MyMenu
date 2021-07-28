@@ -46,6 +46,7 @@ public class NotesSourceFirebaseImpl implements NotesSource{
                         notesData.add(noteData);
                     }
                     Log.d(TAG, "данные получены: " + notesData.size());
+                    notesSourceResponse.initialized(NotesSourceFirebaseImpl.this);
                 } else {
                     Log.d(TAG, "данные не получены: " + task.getException());
                 }

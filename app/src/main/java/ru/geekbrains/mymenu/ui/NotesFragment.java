@@ -89,7 +89,7 @@ public class NotesFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = view.findViewById(R.id.fragmentNotesRecyclerView);
-        data = new NotesSourceImpl(getResources()).init();
+        //data = new NotesSourceImpl(getResources()).init();
         initRecyclerView();
     }
 
@@ -99,7 +99,7 @@ public class NotesFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new NotesAdapter(data, this);
+        adapter = new NotesAdapter(this);
         recyclerView.setAdapter(adapter);
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
@@ -113,8 +113,8 @@ public class NotesFragment extends Fragment {
         animator.setRemoveDuration(MY_DEFAULT_DURATION);
         recyclerView.setItemAnimator(animator);
 
-        if (moveToFirstPosition) {
-            recyclerView.smoothScrollToPosition(data.size() - 1);
+        if (moveToFirstPosition && data.size() > 0) {
+            recyclerView.smoothScrollToPosition(0);
             moveToFirstPosition = false;
         }
 
@@ -161,7 +161,23 @@ public class NotesFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+         return onItemSelected(item.getItemId()) || super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = requireActivity().getMenuInflater();
+        inflater.inflate(R.menu.note_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        return onItemSelected(item.getItemId()) || super.onContextItemSelected(item);
+    }
+
+    private boolean onItemSelected(int menuItemId) {
+        switch (menuItemId) {
             case R.id.notesFragmentMenuAdd:
                 navigation.showFragment(NoteFragment.newInstance(), true);
                 publisher.subscribe(new Observer() {
@@ -177,36 +193,23 @@ public class NotesFragment extends Fragment {
                 data.clearNoteData();
                 adapter.notifyDataSetChanged();
                 return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = requireActivity().getMenuInflater();
-        inflater.inflate(R.menu.note_menu, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int position = adapter.getMenuPosition();
-        switch (item.getItemId()) {
             case R.id.noteMenuUpdate:
-                navigation.showFragment(NoteFragment.newInstance(data.getNoteData(position)), true);
+                int updatePosition = adapter.getMenuPosition();
+                navigation.showFragment(NoteFragment.newInstance(data.getNoteData(updatePosition)), true);
                 publisher.subscribe(new Observer() {
                     @Override
                     public void updateNoteData(NoteData noteData) {
-                        data.updateNoteData(position, noteData);
-                        adapter.notifyItemChanged(position);
+                        data.updateNoteData(updatePosition, noteData);
+                        adapter.notifyItemChanged(updatePosition);
                     }
                 });
                 return true;
             case R.id.noteMenuDelete:
-                data.deleteNoteData(position);
-                adapter.notifyItemRemoved(position);
+                int deletePosition = adapter.getMenuPosition();
+                data.deleteNoteData(deletePosition);
+                adapter.notifyItemRemoved(deletePosition);
                 return true;
         }
-        return super.onContextItemSelected(item);
+        return false;
     }
 }
