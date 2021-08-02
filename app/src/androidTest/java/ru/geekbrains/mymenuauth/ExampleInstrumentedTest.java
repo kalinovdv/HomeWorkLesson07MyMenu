@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu;
+package ru.geekbrains.mymenuauth;
 
 import android.content.Context;
 

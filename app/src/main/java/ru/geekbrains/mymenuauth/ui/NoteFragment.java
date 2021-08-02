@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu.ui;
+package ru.geekbrains.mymenuauth.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,10 +17,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Calendar;
 import java.util.Date;
 
-import ru.geekbrains.mymenu.MainActivity;
-import ru.geekbrains.mymenu.data.NoteData;
-import ru.geekbrains.mymenu.R;
-import ru.geekbrains.mymenu.observe.Publisher;
+import ru.geekbrains.mymenuauth.MainActivity;
+import ru.geekbrains.mymenuauth.data.NoteData;
+import ru.geekbrains.mymenuauth.R;
+import ru.geekbrains.mymenuauth.observe.Publisher;
 
 public class NoteFragment extends Fragment {
 

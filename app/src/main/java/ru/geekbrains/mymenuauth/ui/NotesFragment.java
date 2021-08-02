@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu.ui;
+package ru.geekbrains.mymenuauth.ui;
 
 import android.content.Context;
 import android.os.Build;
@@ -21,16 +21,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import ru.geekbrains.mymenu.MainActivity;
-import ru.geekbrains.mymenu.Navigation;
-import ru.geekbrains.mymenu.data.NoteData;
-import ru.geekbrains.mymenu.R;
-import ru.geekbrains.mymenu.data.NotesSource;
-import ru.geekbrains.mymenu.data.NotesSourceFirebaseImpl;
-import ru.geekbrains.mymenu.data.NotesSourceImpl;
-import ru.geekbrains.mymenu.data.NotesSourceResponse;
-import ru.geekbrains.mymenu.observe.Observer;
-import ru.geekbrains.mymenu.observe.Publisher;
+import ru.geekbrains.mymenuauth.MainActivity;
+import ru.geekbrains.mymenuauth.Navigation;
+import ru.geekbrains.mymenuauth.data.NoteData;
+import ru.geekbrains.mymenuauth.R;
+import ru.geekbrains.mymenuauth.data.NotesSource;
+import ru.geekbrains.mymenuauth.data.NotesSourceFirebaseImpl;
+import ru.geekbrains.mymenuauth.data.NotesSourceResponse;
+import ru.geekbrains.mymenuauth.observe.Observer;
+import ru.geekbrains.mymenuauth.observe.Publisher;
 
 public class NotesFragment extends Fragment {
 

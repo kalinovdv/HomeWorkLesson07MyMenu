@@ -1,8 +1,7 @@
-package ru.geekbrains.mymenu;
+package ru.geekbrains.mymenuauth;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -18,8 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import ru.geekbrains.mymenu.observe.Publisher;
-import ru.geekbrains.mymenu.ui.NotesFragment;
+import ru.geekbrains.mymenuauth.observe.Publisher;
+import ru.geekbrains.mymenuauth.ui.NotesFragment;
 
 public class MainActivity extends AppCompatActivity {
 

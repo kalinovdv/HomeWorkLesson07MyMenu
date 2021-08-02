@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu;
+package ru.geekbrains.mymenuauth;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

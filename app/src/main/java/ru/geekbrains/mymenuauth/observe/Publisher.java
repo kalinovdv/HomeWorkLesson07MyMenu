@@ -1,9 +1,9 @@
-package ru.geekbrains.mymenu.observe;
+package ru.geekbrains.mymenuauth.observe;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.geekbrains.mymenu.data.NoteData;
+import ru.geekbrains.mymenuauth.data.NoteData;
 
 public class Publisher {
     private List<Observer> observers;

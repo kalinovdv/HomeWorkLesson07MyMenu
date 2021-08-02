@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu.data;
+package ru.geekbrains.mymenuauth.data;
 
 import com.google.firebase.Timestamp;
 

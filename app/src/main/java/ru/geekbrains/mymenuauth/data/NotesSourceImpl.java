@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu.data;
+package ru.geekbrains.mymenuauth.data;
 
 import android.content.res.Resources;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import ru.geekbrains.mymenu.R;
+import ru.geekbrains.mymenuauth.R;
 
 public class NotesSourceImpl implements NotesSource{
 

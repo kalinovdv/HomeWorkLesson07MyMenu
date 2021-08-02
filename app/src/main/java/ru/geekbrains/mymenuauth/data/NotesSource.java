@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu.data;
+package ru.geekbrains.mymenuauth.data;
 
 public interface NotesSource {
     NotesSource init(NotesSourceResponse notesSourceResponse);

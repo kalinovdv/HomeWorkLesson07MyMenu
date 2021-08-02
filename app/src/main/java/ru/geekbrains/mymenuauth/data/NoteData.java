@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu.data;
+package ru.geekbrains.mymenuauth.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

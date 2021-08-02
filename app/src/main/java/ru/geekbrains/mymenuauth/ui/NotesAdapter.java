@@ -1,4 +1,4 @@
-package ru.geekbrains.mymenu.ui;
+package ru.geekbrains.mymenuauth.ui;
 
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 
-import ru.geekbrains.mymenu.data.NoteData;
-import ru.geekbrains.mymenu.R;
-import ru.geekbrains.mymenu.data.NotesSource;
+import ru.geekbrains.mymenuauth.data.NoteData;
+import ru.geekbrains.mymenuauth.R;
+import ru.geekbrains.mymenuauth.data.NotesSource;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
