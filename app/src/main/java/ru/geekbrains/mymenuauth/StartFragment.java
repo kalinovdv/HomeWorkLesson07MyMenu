@@ -1,57 +1,68 @@
 package ru.geekbrains.mymenuauth;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+
+import ru.geekbrains.mymenuauth.ui.NotesFragment;
+
 public class StartFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final int RC_SIGN_IN = 40404;
+    private static final String TAG = "GoogleAuth";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Navigation navigation;
 
-    public StartFragment() {
-        // Required empty public constructor
-    }
+    private GoogleSignInClient googleSignInClient;
+    
+    private SignInButton buttonSignIn;
+    private TextView emailView;
+    private MaterialButton continue_;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StartFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StartFragment newInstance(String param1, String param2) {
+    public static StartFragment newInstance() {
         StartFragment fragment = new StartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        MainActivity mainActivity = (MainActivity) context;
+        navigation = mainActivity.getNavigation();
+    }
+
+    @Override
+    public void onDetach() {
+        navigation = null;
+        super.onDetach();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        if (account != null) {
+            disableSign();
+            updateUI(account.getEmail());
         }
     }
 
@@ -59,6 +70,76 @@ public class StartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_start, container, false);
+        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        initGoogleSign();
+        initView(view);
+        enableSign();
+        return view;
+    }
+
+    private void initView(View view) {
+        buttonSignIn = view.findViewById(R.id.sign_in_button);
+        buttonSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+
+        emailView = view.findViewById(R.id.email);
+
+        continue_ = view.findViewById(R.id.continue_);
+        continue_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigation.showFragment(NotesFragment.newInstance(), false);
+            }
+        });
+    }
+
+    private void signIn() {
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            disableSign();
+            updateUI(account.getEmail());
+        } catch (ApiException e) {
+            Log.d(TAG, "signInResult:failed code=" + e.getStatusCode());
+        }
+    }
+
+    private void initGoogleSign() {
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(getContext(), googleSignInOptions);
+    }
+
+    private void enableSign() {
+        buttonSignIn.setEnabled(true);
+        continue_.setEnabled(false);
+    }
+
+    private void disableSign() {
+        buttonSignIn.setEnabled(false);
+        continue_.setEnabled(true);
+    }
+
+    private void updateUI(String email) {
+        emailView.setText(email);
     }
 }

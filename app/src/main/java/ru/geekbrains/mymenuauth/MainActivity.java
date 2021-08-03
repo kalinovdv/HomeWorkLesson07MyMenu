@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         navigation = new Navigation(getSupportFragmentManager());
-        getNavigation().showFragment(NotesFragment.newInstance(), false);
+        getNavigation().showFragment(StartFragment.newInstance(), false);
         initView();
     }
 
