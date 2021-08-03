@@ -21,8 +21,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import ru.geekbrains.mymenuauth.MainActivity;
 import ru.geekbrains.mymenuauth.Navigation;
+import ru.geekbrains.mymenuauth.StartFragment;
 import ru.geekbrains.mymenuauth.data.NoteData;
 import ru.geekbrains.mymenuauth.R;
 import ru.geekbrains.mymenuauth.data.NotesSource;
@@ -207,6 +214,16 @@ public class NotesFragment extends Fragment {
                 int deletePosition = adapter.getMenuPosition();
                 data.deleteNoteData(deletePosition);
                 adapter.notifyItemRemoved(deletePosition);
+                return true;
+            case R.id.notesFragmentMenuExit:
+                GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+                GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
+                googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        navigation.showFragment(StartFragment.newInstance(), false);
+                    }
+                });
                 return true;
         }
         return false;

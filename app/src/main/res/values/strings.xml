@@ -34,4 +34,5 @@
     <string name="NoteFragmentInputTitleHint">Заголовок</string>
     <string name="NoteFragmentInputTextHint">Описание</string>
     <string name="startFragmentMaterialButtonText">Продолжить...</string>
+    <string name="notesFragmentMenuExitTitle">Выйти</string>
 </resources>

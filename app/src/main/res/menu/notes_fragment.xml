@@ -30,4 +30,11 @@
         android:title="@string/notesFragmentMenuClearTitel"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/notesFragmentMenuExit"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="110"
+        android:title="@string/notesFragmentMenuExitTitle"
+        app:showAsAction="never"/>
+
 </menu>
