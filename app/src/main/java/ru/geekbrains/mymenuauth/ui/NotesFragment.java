@@ -1,6 +1,8 @@
 package ru.geekbrains.mymenuauth.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -211,9 +213,27 @@ public class NotesFragment extends Fragment {
                 });
                 return true;
             case R.id.noteMenuDelete:
-                int deletePosition = adapter.getMenuPosition();
-                data.deleteNoteData(deletePosition);
-                adapter.notifyItemRemoved(deletePosition);
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setTitle(R.string.alertDialogTitle)
+                        .setMessage(R.string.alertDialogVessage)
+                        .setIcon(R.mipmap.ic_launcher_round)
+                        .setCancelable(true)
+                        .setNegativeButton(R.string.alertDialogNegativeButton, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton(R.string.alertDialogPositiveButton, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int deletePosition = adapter.getMenuPosition();
+                                data.deleteNoteData(deletePosition);
+                                adapter.notifyItemRemoved(deletePosition);
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 return true;
             case R.id.notesFragmentMenuExit:
                 GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();

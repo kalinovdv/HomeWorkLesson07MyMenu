@@ -35,4 +35,8 @@
     <string name="NoteFragmentInputTextHint">Описание</string>
     <string name="startFragmentMaterialButtonText">Продолжить...</string>
     <string name="notesFragmentMenuExitTitle">Выйти</string>
+    <string name="alertDialogTitle">Внимание</string>
+    <string name="alertDialogVessage">Удалить заметку?</string>
+    <string name="alertDialogPositiveButton">Удалить</string>
+    <string name="alertDialogNegativeButton">Отмена</string>
 </resources>
